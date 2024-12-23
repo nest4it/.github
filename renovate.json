@@ -1,0 +1,58 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":label(dependencies)", ":timezone(Europe/Amsterdam)"],
+  "labels": ["ready-to-merge", "renovate"],
+  "dependencyDashboard": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "matchDepNames": ["yarn"],
+      "allowedVersions": "<3"
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "automerge": true
+    },
+    {
+      "groupName": "testing packages",
+      "matchPackagePatterns": ["^jest", "-jest", "supertest", "@types/jest"],
+      "automerge": true
+    },
+    {
+      "groupName": "@n4it packages",
+      "matchPackagePatterns": ["^@n4it"]
+    },
+    {
+      "groupName": "nestjs packages",
+      "matchPackagePatterns": ["^@nestjs", "express"]
+    },
+    {
+      "groupName": "TypeScript definition packages",
+      "matchPackagePatterns": ["^@types/"],
+      "automerge": true
+    },
+    {
+      "updateTypes": ["minor", "patch"],
+      "schedule": ["every weekday"],
+       "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "schedule": ["every weekday"]
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ]
+}
